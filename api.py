@@ -1,6 +1,7 @@
 # Dependencies
 from flask import Flask, request, jsonify
 from sklearn.externals import joblib
+import pickle
 import traceback
 import pandas as pd
 import numpy as np
@@ -40,10 +41,12 @@ if __name__ == '__main__':
     #     port = int(sys.argv[1]) # This is for a command-line input
     # except:
     #     port = 12345 # If you don't provide any port the port will be set to 12345
-
-    lr = joblib.load("model.pkl") # Load "model.pkl"
+    fileobject=open("model.pkl","rb")
+    lr = pickle.load(fileobject) # Load "model.pkl"
     print('Model loaded')
-    model_columns = joblib.load("model_columns.pkl") # Load "model_columns.pkl"
+
+    fileobject = open("model_columns.pkl", "rb")
+    model_columns = pickle.load(fileobject)
     print('Model columns loaded')
 
     app.run(debug=True)
