@@ -1,4 +1,8 @@
 import re
+import pytesseract
+import cv2
+import numpy
+import string
 try:
     from PIL import Image
 except ImportError:
@@ -21,25 +25,30 @@ class OCR:
         Full_Name = self.Full_Name(text)
         data = self.Caps_isvalid(text)
 
-        # Father_name = self.Only_Name(text)
-
         Name = Full_Name[0]
         Father_name = Full_Name[1]
 
-        print("Birth_Date: ", Birthdate_Result)
-        print("PanNo_Result: ", PanNo_Result)
-        print("Full_Name: ", Full_Name)
-        print("Name: ", Name)
-        print("Father_name: ", Father_name)
-        print("data: ", data)
+        Name1 = data[-2]
+        Father_name1 = data[-1]
+
+        # print("Birth_Date: ", Birthdate_Result)
+        # print("PanNo_Result: ", PanNo_Result)
+        # print("Full_Name: ", Full_Name)
+        # print("Name: ", Name)
+        # print("Father_name: ", Father_name)
+        # print("data: ", data)
+        # print("Name1: ", Name1)
+        # print("Father_name1: ", Father_name1)
 
         name = "Full_Name " + str(Name)
         father = "Father_name " + str(Father_name)
         birth = "Birth_Date " + str(Birthdate_Result)
         pan = "PanNo_Result " + str(PanNo_Result)
         data = "Name" + str(data)
+        name1 = "Full_Name1 " + str(Name1)
+        father1 = "Father_name1 " + str(Father_name1)
 
-        result = [name,father, birth, pan,data]
+        result = [name,father, birth, pan,data,name1,father1]
         return result
 
     def Birthdate_isValid(self, readdata):
